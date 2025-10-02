@@ -1,7 +1,7 @@
 import express from 'express';
-import fetch from 'node-fetch';
-import dotenv from 'dotenv';
 import cors from 'cors';
+import dotenv from 'dotenv';
+import fetch from 'node-fetch';
 
 dotenv.config();
 
@@ -11,10 +11,11 @@ app.use(express.json());
 app.use(
   cors({
     origin: 'https://hamza-sweid.github.io/social-support',
-    methods: ['GET', 'POST'],
-    credentials: true,
+    methods: ['GET', 'POST', 'OPTIONS'],
   })
 );
+
+app.options('/api/chat', cors());
 
 app.post('/api/chat', async (req, res) => {
   try {
@@ -33,14 +34,8 @@ app.post('/api/chat', async (req, res) => {
       }),
     });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      return res.status(response.status).json({ error: errorData });
-    }
-
     const data = await response.json();
-
-    res.json({ text: data.choices[0]?.message?.content || '' });
+    res.json(data);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Internal server error' });
