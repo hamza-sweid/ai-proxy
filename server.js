@@ -10,7 +10,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: 'http://localhost:5173', // React dev server
+    origin: 'https://hamza-sweid.github.io/sociat-support',
     methods: ['GET', 'POST'],
     credentials: true,
   })
