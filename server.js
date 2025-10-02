@@ -10,7 +10,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: 'https://hamza-sweid.github.io/sociat-support',
+    origin: 'https://hamza-sweid.github.io/social-support',
     methods: ['GET', 'POST'],
     credentials: true,
   })
